@@ -1,7 +1,6 @@
 <template>
 
     <div class="post"> 
-
 			<div class="post__header">
 
 				<div class="post__user">

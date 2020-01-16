@@ -1,7 +1,6 @@
 <template>
-    <div class="container">
+    <div class="container" > {{post}}
         <div class="post">
-            {{postId}}
             <div class="post__header">
 
                 <div class="post__user">
@@ -52,15 +51,23 @@
 
 <script>
 export default {
-    created () {
-        const posts = require('./../fakedata.json').posts
-        for (const post of posts){
-            if(post.id === this.postId){
-                return this.post = post
-            }
-        }
+    props: ['post'],
+    async created () {
+        this.post = await this.$store.dispatch('getPostById', this.postId)
+        console.log(this.post, 'i am the post in post editor')
+        console.log(this.post.user.name)
     },
-    
+    // async created () {
+    //     // const posts = this.$store.state.posts
+    //     this.post = await this.$store.dispatch('getPostById', this.postId)
+    //      console.log(this.post, 'i am the post in post editor')
+    //     // for (const post of posts){
+    //     //     if(post.id === this.postId){
+    //     //         return this.post = post
+    //     //     }
+    //     // }
+
+    // },
     data () {
         return {
             posts: null

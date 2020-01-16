@@ -37,9 +37,9 @@
 	
 		<!-- <post :data="posts[0]"></post> -->
 	
-		<post v-for="post of posts" 
+		<!-- <post v-for="post of posts" 
 		:data="post" 
-		v-bind:key="post.id"></post>
+		v-bind:key="post.id"></post> -->
 
 	</div>
 
