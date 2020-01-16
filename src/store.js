@@ -15,8 +15,22 @@ export default new Vuex.Store ({
     },
     actions: {
         downloadPosts ({ commit }) {
-            const fakedata = require('./fakedata.json')
-            commit('setPosts', fakedata.posts)
+            if(!localStorage.getItem('__data__')){
+                const fakedata = require('./fakedata.json')
+                localStorage.setItem('__data__', JSON.stringify(fakedata.posts))
+            }  
+                const posts = JSON.parse(localStorage.getItem('__data__'))
+                commit('setPosts', posts)
+        },
+
+        async updatePost({state, dispatch}, id, data){
+            const post = await dispatch('getPostById', id)
+            post.description = data
+            localStorage.setItem('__data__', JSON.stringify(state.posts))
+            console.log({data})
+            console.log(localStorage)
+            console.log(state.posts)
+          
         },
 
         async getPostById ({state, dispatch}, id){

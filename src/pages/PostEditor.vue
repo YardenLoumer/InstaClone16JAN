@@ -1,5 +1,5 @@
 <template>
-    <div class="container" > {{post}}
+    <div class="container" v-if="post"> {{post}}
         <div class="post">
             <div class="post__header">
 
@@ -41,7 +41,7 @@
             </div>
 
             <div class="post__buttons">
-                <button class="btn btn--save">Сохранить</button>
+                <button @click="updatePost" class="btn btn--save">Сохранить</button>
                 <button class="btn btn--cancel">Отмена</button>
             </div>
         </div>
@@ -51,32 +51,28 @@
 
 <script>
 export default {
-    props: ['post'],
     async created () {
         this.post = await this.$store.dispatch('getPostById', this.postId)
-        console.log(this.post, 'i am the post in post editor')
-        console.log(this.post.user.name)
     },
-    // async created () {
-    //     // const posts = this.$store.state.posts
-    //     this.post = await this.$store.dispatch('getPostById', this.postId)
-    //      console.log(this.post, 'i am the post in post editor')
-    //     // for (const post of posts){
-    //     //     if(post.id === this.postId){
-    //     //         return this.post = post
-    //     //     }
-    //     // }
 
-    // },
+    
     data () {
         return {
-            posts: null
+            post: null
         }
     },
     computed: {
         postId(){
             return parseInt(this.$route.params.id)
         }
+    },
+
+    methods: {
+    updatePost () {
+      const word = "nana banana"
+      this.$store.dispatch('updatePost', this.postId, word)
+        console.log('post updated',word )
     }
+  }
 }
 </script>

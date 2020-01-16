@@ -20,7 +20,6 @@ export default {
 
 	created() {
 		this.$store.dispatch('downloadPosts')
-		console.log('i downloaded posts in wall')
 	},
 
 	computed: {
