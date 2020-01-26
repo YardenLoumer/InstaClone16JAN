@@ -13,8 +13,8 @@ export default new Vuex.Store ({
         setPosts(state, payload){
             state.posts = payload
         },
-        setId(state){
-            state.postId++
+        setId(state, payload){
+            state.postId = payload
         }
         
     },
@@ -58,8 +58,18 @@ export default new Vuex.Store ({
         },
 
          getNextId ({state, commit}) {
-            const id = state.postId
-            commit('setId')
+             let id = null
+             
+            if(!localStorage.getItem('__id__')){
+                id = state.postId
+                localStorage.setItem('__id__', id)
+            }
+
+            id = JSON.parse(localStorage.getItem('__id__'))
+            
+            let newId = id + 1
+            localStorage.setItem('__id__', newId)
+            commit('setId', newId)
             return id
         }
     }

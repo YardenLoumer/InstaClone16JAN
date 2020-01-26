@@ -10,7 +10,7 @@
 							<img src="img/avatars/01.png" alt="">
 						</a>
                         <div>
-                            message comes here: {{message}}<br>
+                            User Info: 
                         </div>
 						<a href="#" class="user__name">
                                <input v-model="newName" placeholder="Enter a name">
