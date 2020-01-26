@@ -54,8 +54,6 @@ export default {
     async created () {
         this.post = await this.$store.dispatch('getPostById', this.postId)
     },
-
-    
     data () {
         return {
             post: null
@@ -68,11 +66,16 @@ export default {
     },
 
     methods: {
-    updatePost () {
-      const word = "nana banana"
-      this.$store.dispatch('updatePost', this.postId, word)
-        console.log('post updated',word )
+     updatePost() {
+      const data = {
+          id: 1,
+          description: 'new description',
+          tags: ["instatag", "instanewtag", "followme "],
+          src: "/img/posts/man-in-forest.jpg"
+      }
+      this.$store.dispatch('updatePost', data)
     }
+
   }
 }
 </script>

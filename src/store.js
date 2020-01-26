@@ -5,13 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store ({
     state: {
-        posts: []
+        posts: [],
+        postId: 3
     },
 
     mutations: {
         setPosts(state, payload){
             state.posts = payload
+        },
+        setId(state){
+            state.postId++
         }
+        
     },
     actions: {
         downloadPosts ({ commit }) {
@@ -23,27 +28,39 @@ export default new Vuex.Store ({
                 commit('setPosts', posts)
         },
 
-        async updatePost({state, dispatch}, id, data){
-            const post = await dispatch('getPostById', id)
-            post.description = data
+        async addPost({commit}, data){
+               const posts = JSON.parse(localStorage.getItem('__data__'))
+               posts.push(data)
+               localStorage.setItem('__data__', JSON.stringify(posts))
+               commit('setPosts', posts)
+        },
+
+        async updatePost({state, dispatch}, data){
+        
+            const post = await dispatch('getPostById', data.id)
+            post.description = data.description
+            post.tags = data.tags
+            post.src = data.src
             localStorage.setItem('__data__', JSON.stringify(state.posts))
-            console.log({data})
-            console.log(localStorage)
-            console.log(state.posts)
-          
+            await dispatch('downloadPosts')
         },
 
         async getPostById ({state, dispatch}, id){
-            console.log(state.posts.length, 'length')
+            
             if(!state.posts.length){
                 await dispatch('downloadPosts')
             }
             for(const post of state.posts){
                 if(post.id === id){
-                    console.log(post, 'i am the post')
                     return post
                 }
             }
+        },
+
+         getNextId ({state, commit}) {
+            const id = state.postId
+            commit('setId')
+            return id
         }
     }
 })

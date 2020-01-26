@@ -18,8 +18,6 @@
 						<i class="far fa-trash-alt"></i>
 						Delete
 					</a>
-
-
 					<a href="edit.html" class="edit-link">
 						<i class="fas fa-pencil-alt"></i>
 						Edit

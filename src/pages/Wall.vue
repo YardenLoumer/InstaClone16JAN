@@ -2,7 +2,11 @@
     <div class="container">
 	
 		<!-- <post :data="posts[0]"></post> -->
-	
+		
+			<router-link :to="`/add`" >
+				<button> Add new post</button>
+			</router-link>
+			
 		<post v-for="post of posts" 
 		:data="post" 
 		v-bind:key="post.id"></post>

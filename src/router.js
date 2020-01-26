@@ -19,6 +19,10 @@ export default new VueRouter({
             component: () => import('@/pages/PostEditor.vue')
         },
         {
+            path: '/add',
+            component: () => import('@/pages/AddNew.vue')
+        },
+        {
             path: '*',
             redirect: '/wall'
         },
